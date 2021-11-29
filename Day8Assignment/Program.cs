@@ -9,17 +9,22 @@ int Emp_Rate_per_Hour = 20;
 Random random = new Random();
 int randominput = random.Next(0, 2);
 
-if (randominput == isPresent)
+switch (randominput)
 {
-    emp_hrs=8;
+    case 1:
+is_Full_Time:
+        emp_hrs = 8;
+        break;
+
+    case 2:
+is_Part_Time:
+        emp_hrs = 4;
+        break;
+
+    default:
+        emp_hrs = 0;
+        break;
 }
-else if (randominput == isPresent)
-{
-    emp_hrs=4;
-}
-else
-{
-    emp_hrs = 0;
-}
+
 empWage=emp_hrs*Emp_Rate_per_Hour;
 Console.WriteLine("Employee Wage:"+empWage);
