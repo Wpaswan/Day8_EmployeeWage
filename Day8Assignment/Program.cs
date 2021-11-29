@@ -13,6 +13,10 @@ if (randominput == isPresent)
 {
     emp_hrs=8;
 }
+else if (randominput == isPresent)
+{
+    emp_hrs=4;
+}
 else
 {
     emp_hrs = 0;
