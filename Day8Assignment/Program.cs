@@ -1,14 +1,14 @@
 ﻿
 namespace Day8Assignment
 {
-    internal class Program
+    internal class ComputeWage
     {
         public const int is_Full_Time = 1;
         public const int is_Part_Time = 2;
         public const int RatePerHrs = 20;
         public const int Max_Working_Days = 20;
         public const int Max_Working_Hrs = 100;
-        public static void input3()
+        public static void Compute_wage()
         {
 
             int empWage = 0;
@@ -55,7 +55,7 @@ namespace Day8Assignment
         }
         public static void Main(String[] args)
         {
-            Program.input3();
+            ComputeWage.Compute_wage();
         }
         
     }
