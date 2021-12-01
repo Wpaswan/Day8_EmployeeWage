@@ -7,12 +7,15 @@ namespace Day8Assignment
         public const int is_Part_Time = 2;
         public const int RatePerHrs = 20;
         public const int Max_Working_Days = 20;
+        public const int Max_Working_Hrs = 100;
         public static void input3()
         {
 
             int empWage = 0;
             int empHrs = 0;
             int totalEmpWage = 0;
+            int totalEmpHrs = 0;
+            int totalDays = 1;
             string typeOfEmployee = "";
             string name = "XyZ";
 
@@ -39,9 +42,12 @@ namespace Day8Assignment
                         typeOfEmployee = "Absent";
                         break;
                 }
+                totalEmpHrs = totalEmpHrs + empHrs;
                 empWage = RatePerHrs * empHrs;
+                totalEmpWage = RatePerHrs * totalEmpHrs;
                 Console.WriteLine("{0}Emplyee of day: {1}wage is {2}", typeOfEmployee, day, empWage);
                 totalEmpWage = totalEmpWage + empWage;
+                totalDays++;
             }
             Console.WriteLine("Employee wage for {0} day is : {1}", Max_Working_Days, totalEmpWage);
             Console.ReadLine();
