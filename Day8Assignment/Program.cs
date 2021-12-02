@@ -1,7 +1,7 @@
 ﻿
 namespace Day8Assignment
 {
-    //Uc7 Use of Class
+    //Uc8 Use for multiple companies
     internal class ComputeEmployeeWage
     {
         public const int is_Full_Time = 1;
@@ -9,54 +9,42 @@ namespace Day8Assignment
         public const int RatePerHrs = 20;
         public const int Max_Working_Days = 20;
         public const int Max_Working_Hrs = 100;
-        public static void Compute_wage()
+        public static void Compute_wage(string company, int empRatePerHour, int numOfWorkingDay, int MaxHoursPerMonth)
         {
 
             int empWage = 0;
             int empHrs = 0;
-            int totalEmpWage = 0;
             int totalEmpHrs = 0;
-            int totalDays = 1;
-            string typeOfEmployee = "";
-            string name = "XyZ";
-
-
-            Random employee = new Random();
-            for (int day = 1; day <= Max_Working_Days; day++)
+            int totalWorkingDays = 0;
+            int totalEmpWage = 0;
+           
+            while(totalEmpHrs <=MaxHoursPerMonth && totalWorkingDays<numOfWorkingDay)
             {
-                int randomInput = employee.Next(0, 3);
-                
-                switch (randomInput)
+                totalWorkingDays++;
+                Random random = new Random();
+                int empCheck = random.Next(0, 3);
+                switch (empCheck)
                 {
-                    case is_Full_Time:
-                        empHrs = 8;
-                        typeOfEmployee = "Full Time";
-                        break;
-
                     case is_Part_Time:
-                        empHrs = 4;
-                        typeOfEmployee = "Part Time";
+                        empHrs=4;
                         break;
-
-                    default:
-                        empHrs = 0;
-                        typeOfEmployee = "Absent";
+                        case is_Full_Time:
+                        empHrs = 8;
+                        break;
+                        default: empHrs = 0;
                         break;
                 }
-                totalEmpHrs = totalEmpHrs + empHrs;
-                empWage = RatePerHrs * empHrs;
-                totalEmpWage = RatePerHrs * totalEmpHrs;
-                Console.WriteLine("{0}Emplyee of day: {1}wage is {2}", typeOfEmployee, day, empWage);
-                totalEmpWage = totalEmpWage + empWage;
-                totalDays++;
+                totalEmpHrs+=empHrs;
+                Console.WriteLine("Days:"+totalWorkingDays+" Emp Hrs:"+empHrs);
             }
-            Console.WriteLine("Employee wage for {0} day is : {1}", Max_Working_Days, totalEmpWage);
-            Console.ReadLine();
-
+             totalEmpWage = totalEmpHrs+empRatePerHour;
+            Console.WriteLine("Total Emp Wage for company:"+company+" is:"+totalEmpWage);
+            
         }
         public static void Main(String[] args)
         {
-            ComputeEmployeeWage.Compute_wage();
+            ComputeEmployeeWage.Compute_wage("Dmart",20,2,10);
+            ComputeEmployeeWage.Compute_wage("Reliance", 10, 4, 20);
         }
         
     }
