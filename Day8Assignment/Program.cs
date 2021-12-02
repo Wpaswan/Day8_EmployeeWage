@@ -1,6 +1,7 @@
 ﻿
 namespace Day8Assignment
 {
+    //Uc7 Use of Class
     internal class ComputeEmployeeWage
     {
         public const int is_Full_Time = 1;
@@ -24,7 +25,7 @@ namespace Day8Assignment
             for (int day = 1; day <= Max_Working_Days; day++)
             {
                 int randomInput = employee.Next(0, 3);
-                //Use of Switch
+                
                 switch (randomInput)
                 {
                     case is_Full_Time:
