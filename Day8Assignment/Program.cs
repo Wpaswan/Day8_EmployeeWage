@@ -1,7 +1,7 @@
 ﻿
 namespace Day8Assignment
 {
-    internal class ComputeWage
+    internal class ComputeEmployeeWage
     {
         public const int is_Full_Time = 1;
         public const int is_Part_Time = 2;
@@ -24,7 +24,7 @@ namespace Day8Assignment
             for (int day = 1; day <= Max_Working_Days; day++)
             {
                 int randomInput = employee.Next(0, 3);
-
+                //Use of Switch
                 switch (randomInput)
                 {
                     case is_Full_Time:
@@ -55,7 +55,7 @@ namespace Day8Assignment
         }
         public static void Main(String[] args)
         {
-            ComputeWage.Compute_wage();
+            ComputeEmployeeWage.Compute_wage();
         }
         
     }
