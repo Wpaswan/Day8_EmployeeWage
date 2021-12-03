@@ -4,30 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day8Assignment
+namespace Day8Assignment { 
+    public interface IComputeEmpWage
 {
-    internal class CompanyEmpWage
+    public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
+    public void ComputeEmpWage();
+    public int getTotalWage(string company);
+
+}
+
+    public class CompanyEmpWage
     {
         public string company;
         public int empRatePerHour;
         public int numOfWorkingDays;
-        public int maxHourPerMonth;
+        public int maxHoursPerMonth;
         public int totalEmpWage;
-        public CompanyEmpWage(string company,int empRatePerHour, int maxHourPerMonth, int totalEmpWage)
+
+        public CompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
             this.company = company;
             this.empRatePerHour = empRatePerHour;
-            this.maxHourPerMonth = maxHourPerMonth;
-            this.totalEmpWage = totalEmpWage;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonth = maxHoursPerMonth;
+
         }
-        public void setTotalEmpWage(int totalEmpWage)
+        public void SetTotalEmpWage(int totalEmpWage)
         {
-            this.totalEmpWage=totalEmpWage;
+            this.totalEmpWage = totalEmpWage;
         }
         public string toString()
         {
-            return "Total Emp Wage for company :"+this.company+" is:"+this.totalEmpWage;
+            return "Total Employee wage for company" +this.company + "is " + this.totalEmpWage;
         }
-        
     }
+
+}
 }

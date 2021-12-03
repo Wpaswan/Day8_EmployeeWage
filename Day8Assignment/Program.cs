@@ -1,67 +1,86 @@
-﻿
-namespace Day8Assignment
-{
-    internal class ComputeEmployeeWage
-    {
-        public const int is_Full_Time = 1;
-        public const int is_Part_Time = 2;
-        private string company;
-        private int empRatePerHour;
-        private int numOfWorkingDays;
-        private int maxHoursPerMonth;
-        private int totalEmpWage;
-        public ComputeEmployeeWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+﻿using System;
+namespace Day8Assignment { 
+    
+     
+        public class EmpWageBuilder : IComputeEmpWage
         {
-            this.company = company;
-            this.empRatePerHour = empRatePerHour;
-            this.numOfWorkingDays = numOfWorkingDays;
-            this.maxHoursPerMonth = maxHoursPerMonth;
+            public const int IS_PART_TIME = 1;
+            public const int IS_FULL_TIME = 2;
 
-        }
-        public static void Compute_wage()
-        {
-
-            int empWage = 0;
-            int empHrs = 0;
-            int totalEmpHrs = 0;
-            int totalWorkingDays = 0;
-            int totalEmpWage = 0;
-           
-            while(totalEmpHrs <=MaxHoursPerMonth && totalWorkingDays<numOfWorkingDay)
+            private LinkedList<CompanyEmpWage> companyEmpWagesList;
+            private Dictionary<string, CompanyEmpWage> companyToEmpWageMap;
+            public EmpWageBuilder()
             {
-                totalWorkingDays++;
-                Random random = new Random();
-                int empCheck = random.Next(0, 3);
-                switch (empCheck)
-                {
-                    case is_Part_Time:
-                        empHrs=4;
-                        break;
-                        case is_Full_Time:
-                        empHrs = 8;
-                        break;
-                        default: empHrs = 0;
-                        break;
-                }
-                totalEmpHrs+=empHrs;
-                Console.WriteLine("Days:"+totalWorkingDays+" Emp Hrs:"+empHrs);
+                this.companyEmpWagesList = new LinkedList<CompanyEmpWage>();
+                this.companyToEmpWageMap = new Dictionary<string, CompanyEmpWage>();
             }
-             totalEmpWage = totalEmpHrs+empRatePerHour;
-            Console.WriteLine("Total Emp Wage for company:"+company+" is:"+totalEmpWage);
-            
-        }
-        public string toString()
-        {
-            return "Total Emp Wage for company:"+this.company+" is:"+this.totalEmpWage;
-        }
-        public static void Main(String[] args)
-        {
-            ComputeEmployeeWage dMart = new ComputeEmployeeWage("Dmart", 20, 2, 10);
-            ComputeEmployeeWage reliance = new ComputeEmployeeWage("Reliance", 10, 4, 20);
+            public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+            {
+                CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+                this.companyEmpWagesList.AddLast(companyEmpWage);
+                this.companyToEmpWageMap.Add(company, companyEmpWage);
+
+            }
+            public void ComputeEmpWage()
+            {
+                foreach (CompanyEmpWage companyEmpWage in this.companyEmpWagesList)
+                {
+                    companyEmpWage.SetTotalEmpWage(this.ComputeEmpWage(companyEmpWage));
+                    Console.WriteLine(companyEmpWage.toString());
+                }
+            }
+
+            private int ComputeEmpWage(CompanyEmpWage companyEmpWage)
+            {
+                int empHrs = 0;
+                int totalEmpHrs = 0;
+
+                int totalWorkingDays = 0;
 
 
+                while (totalEmpHrs <= companyEmpWage.maxHoursPerMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays)
+                {
+                    totalWorkingDays++;
+                    Random random = new Random();
+                    int randomInput = random.Next(0, 3);
+                    switch (randomInput)
+                    {
+
+                        case IS_PART_TIME:
+                            empHrs = 4;
+
+                            break;
+
+                        case IS_FULL_TIME:
+                            empHrs = 8;
+
+                            break;
+
+                        default:
+                            empHrs = 0;
+
+                            break;
+                    }
+                    totalEmpHrs += empHrs;
+                    Console.WriteLine("Days#:" + totalWorkingDays + " Emphrs : " + empHrs);
+                }
+                return totalEmpHrs * companyEmpWage.empRatePerHour;
+            }
+
+            public int getTotalWage(string company)
+            {
+                return companyToEmpWageMap[company].totalEmpWage;
+            }
+        static void Main(string[] args)
+        {
+            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
+            empWageBuilder.addCompanyEmpWage("DMart", 20, 2, 10);
+            empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
+            empWageBuilder.ComputeEmpWage();
+
+            Console.WriteLine("Total Wage for DMart Company :  "+empWageBuilder.getTotalWage("DMart"));
         }
-        
+
     }
-   
-}
+    }
+
