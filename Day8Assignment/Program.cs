@@ -1,15 +1,24 @@
 ﻿
 namespace Day8Assignment
 {
-    //Uc8 Use for multiple companies
     internal class ComputeEmployeeWage
     {
         public const int is_Full_Time = 1;
         public const int is_Part_Time = 2;
-        public const int RatePerHrs = 20;
-        public const int Max_Working_Days = 20;
-        public const int Max_Working_Hrs = 100;
-        public static void Compute_wage(string company, int empRatePerHour, int numOfWorkingDay, int MaxHoursPerMonth)
+        private string company;
+        private int empRatePerHour;
+        private int numOfWorkingDays;
+        private int maxHoursPerMonth;
+        private int totalEmpWage;
+        public ComputeEmployeeWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+        {
+            this.company = company;
+            this.empRatePerHour = empRatePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonth = maxHoursPerMonth;
+
+        }
+        public static void Compute_wage()
         {
 
             int empWage = 0;
@@ -41,10 +50,16 @@ namespace Day8Assignment
             Console.WriteLine("Total Emp Wage for company:"+company+" is:"+totalEmpWage);
             
         }
+        public string toString()
+        {
+            return "Total Emp Wage for company:"+this.company+" is:"+this.totalEmpWage;
+        }
         public static void Main(String[] args)
         {
-            ComputeEmployeeWage.Compute_wage("Dmart",20,2,10);
-            ComputeEmployeeWage.Compute_wage("Reliance", 10, 4, 20);
+            ComputeEmployeeWage dMart = new ComputeEmployeeWage("Dmart", 20, 2, 10);
+            ComputeEmployeeWage reliance = new ComputeEmployeeWage("Reliance", 10, 4, 20);
+
+
         }
         
     }
