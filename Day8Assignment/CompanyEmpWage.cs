@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day8Assignment { 
+namespace Day8Assignment {
     public interface IComputeEmpWage
-{
-    public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
-    public void ComputeEmpWage();
-    public int getTotalWage(string company);
+    {
+        public void addCompanyEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth);
+        public void ComputeEmpWage();
+        public int getTotalWage(string company);
 
-}
-
+    }
     public class CompanyEmpWage
     {
         public string company;
@@ -38,6 +37,4 @@ namespace Day8Assignment {
             return "Total Employee wage for company" +this.company + "is " + this.totalEmpWage;
         }
     }
-
-}
 }
